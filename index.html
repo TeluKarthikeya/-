@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Protected Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f9f9f9;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #message {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+  <script>
+    // Disable right click and text selection
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("selectstart", e => e.preventDefault());
+
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      const correctPassword = "karthik@123";
+
+      if (password === correctPassword) {
+        // Hidden redirect (link never shown in HTML)
+        window.location.href = "https://drive.google.com/drive/folders/1Uw-BxmOZm5zqJ2bUGWG2hyHiQ5hsfyHk?usp=drive_link";
+      } else {
+        document.getElementById("message").innerText = "❌ Wrong password. Try again!";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>🔐 Enter Password to Continue</h2>
+  <input type="password" id="password" placeholder="Enter password">
+  <br>
+  <button onclick="checkPassword()">Submit</button>
+  <p id="message"></p>
+</body>
+</html>
