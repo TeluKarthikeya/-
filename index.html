@@ -3,62 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password Protected Page</title>
+  <title>Protected Access</title>
   <style>
+    /* Body and background */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Container box */
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
       text-align: center;
-      margin-top: 100px;
-      background-color: #f9f9f9;
+      max-width: 400px;
+      width: 90%;
     }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 28px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    }
+
     input[type="password"] {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 250px;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
       border: none;
-      border-radius: 8px;
-      background-color: #28a745;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #f06595);
       color: white;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
+
     button:hover {
-      background-color: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
+
     #message {
-      color: red;
       margin-top: 15px;
+      font-weight: bold;
+      color: #ff6b6b;
+      display: none;
     }
   </style>
-  <script>
-    // Disable right click and text selection
-    document.addEventListener("contextmenu", e => e.preventDefault());
-    document.addEventListener("selectstart", e => e.preventDefault());
+</head>
+<body oncontextmenu="return false" onselectstart="return false">
+  <div class="container">
+    <h1>🔒 Enter Password</h1>
+    <input type="password" id="password" placeholder="Enter your password">
+    <button onclick="checkPassword()">Submit</button>
+    <p id="message">Incorrect password! Try again.</p>
+  </div>
 
+  <script>
     function checkPassword() {
-      const password = document.getElementById("password").value;
+      const input = document.getElementById('password').value.trim();
+      const message = document.getElementById('message');
       const correctPassword = "karthik@123";
 
-      if (password === correctPassword) {
-        // Hidden redirect (link never shown in HTML)
-        window.location.href = "https://drive.google.com/drive/folders/1Uw-BxmOZm5zqJ2bUGWG2hyHiQ5hsfyHk?usp=drive_link";
+      if(input === correctPassword){
+        // Redirect to Google Drive folder
+        window.location.href = "https://drive.google.com/drive/folders/1Uw-BxmOZm5zqJ2bUGWG2hyHiQ5hsfyHk";
       } else {
-        document.getElementById("message").innerText = "❌ Wrong password. Try again!";
+        message.style.display = 'block';
       }
     }
+
+    // Hide error when user starts typing
+    document.getElementById('password').addEventListener('input', function(){
+      document.getElementById('message').style.display = 'none';
+    });
   </script>
-</head>
-<body>
-  <h2>🔐 Enter Password to Continue</h2>
-  <input type="password" id="password" placeholder="Enter password">
-  <br>
-  <button onclick="checkPassword()">Submit</button>
-  <p id="message"></p>
 </body>
 </html>
